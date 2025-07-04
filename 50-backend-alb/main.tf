@@ -37,3 +37,15 @@ resource "aws_lb_listener" "backend_alb" {
 }
 
 
+# create r53 record for dns alb url
+resource "aws_route53_record" "backend_alb" {
+  zone_id = var.zone_id
+  name    = "*.backend.${var.zone_name}"
+  type    = "A"
+
+  alias {
+    name                   = module.backend_alb.dns_name #get dns name from terraform alb module
+    zone_id                = module.backend_alb.zone_id # zone id of ALB created in aws
+    evaluate_target_health = true
+  }
+}
