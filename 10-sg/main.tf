@@ -206,3 +206,4 @@ resource "aws_security_group_rule" "rabbitmq_vpn_ssh" {
 
 }
 
+# create security groups 
