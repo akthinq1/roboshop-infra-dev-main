@@ -41,8 +41,9 @@ resource "aws_lb_listener" "frontend_alb" {
 # create r53 record for dns alb url
 resource "aws_route53_record" "frontend_alb" {
   zone_id = var.zone_id
-  name    = "*.${var.zone_name}"
+  # name    = "*.${var.zone_name}"
   # name    = "*.backend-dev.${var.zone_name}"
+  name    = "${var.environment}.${var.zone_name}" # for cdn we fixed the frontalb record name
   type = "A"
 
   alias {
